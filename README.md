@@ -18,7 +18,7 @@ A modern alternative to the `ls` command inspired by Nushell's output, written i
 1. Install gem (recommended)
 
 ```bash
-gem install lsd
+gem install lsd-rb
 ```
 
 2. Use the installation script
