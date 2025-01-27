@@ -24,7 +24,7 @@ gem install lsd-rb
 2. Use the installation script
 
 ```bash
-git clone https://github.com/your-username/lsd
+git clone https://github.com/aristotelesbr/lsd
 cd lsd
 ./install.sh
 ```
