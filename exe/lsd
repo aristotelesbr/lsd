@@ -1,0 +1,48 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require "lsd"
+require "optparse"
+
+options = {columns: Lsd::TableFormatter::DEFAULT_COLUMNS}
+
+parser =
+  OptionParser.new do |opts|
+    opts.banner = "Usage: lsd [options] [directory]"
+
+    opts.on("--filter-by COLUMNS", Array, "Show only specific columns") do |columns|
+      options[:columns] = columns.map(&:strip)
+    end
+
+    opts.on("-h", "--help", "Show this help message") do
+      puts opts
+      available_columns = Lsd::TableFormatter::AVAILABLE_COLUMNS.keys - Lsd::TableFormatter::REQUIRED_COLUMNS
+      puts "\nAvailable columns for filtering: #{available_columns.join(", ")}"
+      puts "Note: The index (#) column is always shown"
+      puts "\nExamples:"
+      puts "  lsd --filter-by name,size"
+      puts "  lsd --filter-by 'name, size'"
+      exit
+    end
+  end
+
+parser.parse!
+
+begin
+  path = ARGV[0] || "."
+  entries = Dir.children(path)
+    .reject { |e| e.start_with?(".") }
+    .sort
+    .map { |name| Lsd::Entry.new(File.join(path, name)) }
+
+  puts Lsd::TableFormatter.format(entries, options[:columns])
+rescue Errno::ENOENT
+  puts "Error: Directory '#{path}' not found".red
+  exit 1
+rescue Interrupt
+  puts "\nOperation cancelled".yellow
+  exit 0
+rescue => e
+  puts "Error: #{e.message}".red
+  exit 1
+end
