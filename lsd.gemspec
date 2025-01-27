@@ -3,7 +3,7 @@
 require_relative "lib/lsd/version"
 
 Gem::Specification.new do |spec|
-  spec.name = "lsd"
+  spec.name = "lsd-rb"
   spec.version = Lsd::VERSION
   spec.authors = ["Aristóteles Coutinho"]
   spec.email = ["contato@aristoteles.dev"]
