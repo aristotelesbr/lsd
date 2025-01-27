@@ -5,12 +5,12 @@ require_relative "lib/lsd/version"
 Gem::Specification.new do |spec|
   spec.name = "lsd"
   spec.version = Lsd::VERSION
-  spec.authors = ["Your Name"]
-  spec.email = ["your.email@example.com"]
+  spec.authors = ["Aristóteles Coutinho"]
+  spec.email = ["contato@aristoteles.dev"]
 
   spec.summary = "A modern replacement for ls command"
   spec.description = "List directory contents with a modern, colorful interface"
-  spec.homepage = "https://github.com/yourusername/lsd"
+  spec.homepage = "https://github.com/aristotelesbr/lsd"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
 
