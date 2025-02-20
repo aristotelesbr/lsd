@@ -4,14 +4,15 @@ module Lsd
   class TableFormatter
     MAX_NAME_LENGTH = 30
     AVAILABLE_COLUMNS = {
-      "index" => {header: "#", value: ->(entry, idx) { idx.to_s.light_green }},
-      "name" => {header: "name", value: ->(entry, _) { entry.name.light_cyan }},
-      "type" => {header: "type", value: ->(entry, _) { entry.type }},
-      "size" => {header: "size", value: ->(entry, _) { entry.size.light_green }},
-      "modified" => {header: "modified", value: ->(entry, _) { entry.modified.light_magenta }}
+      'index' => { header: '#', value: ->(_entry, idx) { idx.to_s.light_green } },
+      'name' => { header: 'name', value: ->(entry, _) { entry.name.light_cyan } },
+      'type' => { header: 'type', value: ->(entry, _) { entry.type } },
+      'size' => { header: 'size', value: ->(entry, _) { entry.size.light_green } },
+      'modified' => { header: 'modified', value: ->(entry, _) { entry.modified.light_magenta } },
+      'permissions' => { header: 'permissions', value: ->(entry, _) { entry.permissions } }
     }.freeze
 
-    DEFAULT_COLUMNS = %w[index name type size modified]
+    DEFAULT_COLUMNS = %w[index name type size modified permissions]
     REQUIRED_COLUMNS = %w[index]
 
     def self.format(entries, columns = DEFAULT_COLUMNS)
@@ -24,9 +25,9 @@ module Lsd
     end
 
     def format
-      table = Terminal::Table.new(headings: headers, rows: formatted_rows, style: {border: :unicode})
+      table = Terminal::Table.new(headings: headers, rows: formatted_rows, style: { border: :unicode })
 
-      table.to_s.gsub(/[┌┐└┘]/, {"┌" => "╭", "┐" => "╮", "└" => "╰", "┘" => "╯"})
+      table.to_s.gsub(/[┌┐└┘]/, { '┌' => '╭', '┐' => '╮', '└' => '╰', '┘' => '╯' })
     end
 
     private
@@ -39,7 +40,7 @@ module Lsd
           if AVAILABLE_COLUMNS.key?(col)
             true
           else
-            warn "Warning: Unknown column '#{col}'. Available columns: #{(AVAILABLE_COLUMNS.keys - REQUIRED_COLUMNS).join(", ")}".yellow
+            warn "Warning: Unknown column '#{col}'. Available columns: #{(AVAILABLE_COLUMNS.keys - REQUIRED_COLUMNS).join(', ')}".yellow
             false
           end
         end
