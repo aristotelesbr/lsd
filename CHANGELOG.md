@@ -11,6 +11,10 @@
 - Added Pull Request template
 - Updated project documentation
 
+### Changed
+
+- Replace lsd.png
+
 ### Fixed
 
 - Fixed SimpleCov configuration to ensure accurate coverage metrics
