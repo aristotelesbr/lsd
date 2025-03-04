@@ -1,8 +1,4 @@
-# frozen_string_literal: true
-
 require "spec_helper"
-require "fileutils"
-require "tmpdir"
 
 RSpec.describe Lsd::Entry do
   let(:temp_dir) { Dir.mktmpdir }
