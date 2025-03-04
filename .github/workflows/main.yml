@@ -1,27 +1,35 @@
-name: Ruby
+name: Test, Lint and Coverage
 
 on:
   push:
-    branches:
-      - master
-
+    branches: [ '**' ]  # Run on all branches
   pull_request:
+    branches: [ main, development ]  # PRs targeting main or development
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
-    name: Ruby ${{ matrix.ruby }}
-    strategy:
-      matrix:
-        ruby:
-          - '3.4.1'
 
     steps:
-      - uses: actions/checkout@v4
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-          bundler-cache: true
-      - name: Run the default task
-        run: bundle exec rake
+    - uses: actions/checkout@v3
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.2.3'
+        bundler-cache: true
+
+    - name: Run tests with coverage
+      run: bundle exec rspec
+
+    - name: Run standard linting
+      run: bundle exec rake standard
+
+    - name: Check coverage requirements
+      run: bundle exec rake coverage:check
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: coverage/
