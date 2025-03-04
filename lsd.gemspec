@@ -23,13 +23,17 @@ Gem::Specification.new do |spec|
   spec.executables = ["lsd"]
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "optparse", "~> 0.6.0"
   spec.add_dependency "colorize", "~> 1.1"
   spec.add_dependency "terminal-table", "~> 3.0"
-  spec.add_dependency "optparse", "~> 0.6.0"
 
-  spec.add_development_dependency "bundler", "~> 2.0"
-  spec.add_development_dependency "rake", "~> 13.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_development_dependency "standard", "~> 1.3"
+  spec.add_development_dependency "bundler"
+  spec.add_development_dependency "rake"
+  spec.add_development_dependency "rspec"
+  spec.add_development_dependency "standard"
+  spec.add_development_dependency "standard-custom"
+  spec.add_development_dependency "standard-performance"
+  spec.add_development_dependency "simplecov"
+  spec.add_development_dependency "simplecov-json"
   spec.metadata["rubygems_mfa_required"] = "true"
 end

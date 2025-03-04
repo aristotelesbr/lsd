@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Lsd
   class TableFormatter
     MAX_NAME_LENGTH = 30
