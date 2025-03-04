@@ -1,23 +1,18 @@
-# frozen_string_literal: true
-
-require "terminal-table"
-require "colorize"
-
-require_relative "entry"
-require_relative "table_formatter"
-
 module Lsd
   module DirectoryLister
-    class Error < StandardError; end
+    Error = Class.new(StandardError)
+
+    FILE_PRIORITY = 1
+    DIRECTORY_PRIORITY = 0
 
     def self.list(path = ".")
       entries = Dir.entries(path)
-        .reject { |e| e.start_with?(".") }
-        .sort_by { |name| [File.directory?(name) ? 0 : 1, name.downcase] }
+        .reject { |entry| entry.start_with?(".") }
+        .sort_by { |name| [File.directory?(name) ? DIRECTORY_PRIORITY : FILE_PRIORITY, name.downcase] }
         .map { |name| Entry.new(name) }
 
       puts TableFormatter.format(entries)
-    rescue Errno::EACCES => e
+    rescue Errno::EACCES
       raise Error, "Permission denied: #{path}"
     end
   end

@@ -35,13 +35,17 @@ The installation script will:
 
 1. Check if Ruby is installed (>= 3.0)
 2. Install necessary dependencies
+
    ```bash
-   $ bundle install
+   bundle install
    ```
+
 3. Compile the program if needed
+
    ```bash
-   $ chmod +x bin/lsd
+   chmod +x bin/lsd
    ```
+
 4. Move the binary to `/usr/local/bin`
 
 ## Usage
@@ -85,18 +89,6 @@ The index column (#) is always shown.
 └── README.md       # This documentation
 ```
 
-## Contributing
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/new-feature`)
-3. Commit your changes (`git commit -am 'Add new feature'`)
-4. Push to the branch (`git push origin feature/new-feature`)
-5. Create a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
@@ -105,7 +97,43 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/aristotelesbr/lsd. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](https://github.com/[USERNAME]/lsd/blob/master/CODE_OF_CONDUCT.md).
+We welcome contributions to LSD! Here's how you can help:
+
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run the tests to ensure everything passes (`bundle exec rake`)
+5. Commit your changes (`git commit -am 'Add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Create a new Pull Request
+
+### Code Style
+
+This project follows [Ruby Standard Style](https://github.com/standardrb/standard). All pull requests must pass style checks before they can be merged. You can automatically fix most style issues with:
+
+```bash
+bundle exec rake standard:fix
+```
+
+### Test Coverage
+
+We maintain high test coverage in this project. All new features or bug fixes should include tests. Current test coverage is 90%.
+
+To run the test suite with coverage report:
+
+```bash
+bundle exec rake
+```
+
+The coverage report will be generated in the `coverage` directory.
+
+### Pull Request Process
+
+1. Ensure your code follows the project's style guide (Ruby Standard)
+2. Update the CHANGELOG.md with details of your changes
+3. Include tests for your changes
+4. Update documentation if needed
+5. The PR template will guide you through the required information
 
 ## License
 
@@ -113,4 +141,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Lsd project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/lsd/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the LSD project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/aristotelesbr/lsd/blob/master/CODE_OF_CONDUCT.md).
