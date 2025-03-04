@@ -69,8 +69,6 @@ lsd --help
 - name: File/directory name
 - size: Size in human format (KB, MB, etc)
 - type: File type (file, directory, symlink)
-- perms: Unix permissions format
-- owner: Owner
 - modified: Modification date
 
 The index column (#) is always shown.
@@ -142,3 +140,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 ## Code of Conduct
 
 Everyone interacting in the LSD project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/aristotelesbr/lsd/blob/master/CODE_OF_CONDUCT.md).
+
