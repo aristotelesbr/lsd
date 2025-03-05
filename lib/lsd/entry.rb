@@ -12,7 +12,7 @@ module Lsd
     end
 
     def type
-      @type ||= directory? ? "dir".light_blue : "file".light_black
+      @type ||= directory? ? 'dir'.light_blue : 'file'.light_black
     end
 
     def size
@@ -27,6 +27,10 @@ module Lsd
       @modified ||= format_time_ago(stat.mtime)
     end
 
+    def permissions
+      @permissions ||= perms_string(stat.mode.to_s(8)[2..])
+    end
+
     private
 
     def directory?
@@ -39,7 +43,7 @@ module Lsd
         begin
           Dir.glob("#{@full_path}/**/*", File::FNM_DOTMATCH).each do |f|
             next if File.directory?(f)
-            next if f.end_with?("/.", "/..")
+            next if f.end_with?('/.', '/..')
 
             dir_size += File.size(f)
           rescue Errno::ENOENT, Errno::EACCES
@@ -55,16 +59,16 @@ module Lsd
     end
 
     def format_size(bytes)
-      return "0 B" if bytes == 0
+      return '0 B' if bytes == 0
 
       {
-        1024**3 => "GiB",
-        1024**2 => "MiB",
-        1024 => "KiB"
+        1024**3 => 'GiB',
+        1024**2 => 'MiB',
+        1024 => 'KiB'
       }.each do |threshold, unit|
         if bytes >= threshold
           value = bytes.to_f / threshold
-          return (value < 10) ? format("%.1f %s", value, unit) : format("%d %s", value.round, unit)
+          return value < 10 ? format('%.1f %s', value, unit) : format('%d %s', value.round, unit)
         end
       end
       "#{bytes} B"
@@ -82,6 +86,32 @@ module Lsd
       TIME_INTERVALS.each do |threshold, formatter|
         return formatter.call(diff) if diff >= threshold
       end
+    end
+
+    def perms_string(perms)
+      pstring = ''
+      perms.each_char do |p|
+        case p
+        when '0'
+          pstring += '--- '
+        when '1'
+          pstring += '--x '
+        when '2'
+          pstring += '-w- '
+        when '3'
+          pstring += '-wx '
+        when '4'
+          pstring += 'r-- '
+        when '5'
+          pstring += 'r-x '
+        when '6'
+          pstring += 'rw- '
+        when '7'
+          pstring += 'rwx '
+        end
+      end
+
+      pstring
     end
   end
 end
